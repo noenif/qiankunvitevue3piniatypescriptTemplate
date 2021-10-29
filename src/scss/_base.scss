@@ -1,0 +1,12 @@
+$rootSize: 16px !default;
+$designWidth: 375px !default;
+// $designRatio: 2 !default;
+
+// html {
+//   font-size: $rootSize / $designWidth * 100vmin;
+// }
+
+html {
+  font-family: PingFangSC-Medium, PingFang SC, serif;
+  background: $ColorBackground;
+}

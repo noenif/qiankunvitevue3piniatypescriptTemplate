@@ -1,0 +1,57 @@
+@mixin bgImg($url, $width, $height) {
+  display: inline-block;
+  width: $width;
+  height: $height;
+  background-image: url(#{$url});
+  background-size: 100% 100%;
+}
+
+// 1px边框
+@mixin setBorder(
+  $position: bottom,
+  $borderColor: #c5c5c5,
+  $borderRadius: 0,
+  $borderStyle: solid
+) {
+  $positionArr: top, bottom, right, left, all;
+
+  @if not index($positionArr, $position) {
+    @warn "Waring: `#{$position} is not a valid position name.`";
+  }
+
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    pointer-events: none; // 解决内部元素无法点击问题
+    border-radius: $borderRadius;
+    content: '';
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    transform-origin: left top;
+
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      transform: scale(0.3334);
+    }
+    @if ($position == top) {
+      border-top: 1px $borderStyle $borderColor;
+    }
+    @if ($position == bottom) {
+      border-bottom: 1px $borderStyle $borderColor;
+    }
+    @if ($position == left) {
+      border-left: 1px $borderStyle $borderColor;
+    }
+    @if ($position == right) {
+      border-right: 1px $borderStyle $borderColor;
+    }
+    @if ($position == all) {
+      border: 1px $borderStyle $borderColor;
+    }
+  }
+}
